@@ -66,15 +66,11 @@ class SaleOrderLine(orm.Model):
     def field_qty_delivered(self, cr, uid, ids, fields, arg, context):
         res = dict.fromkeys(ids, 0)
         for line in self.browse(cr, uid, ids, context=context):
-            if not line.move_ids:
+            # openerp 7.0 code tries to distinguish between invoiced and
+            # delivered quantities, but line.move_ids doesn't exist
+            # anymore.
                 # consumable or service: assume delivered == invoiced
                 res[line.id] = line.qty_invoiced
-            else:
-                for move in line.move_ids:
-                    if (move.state == 'done' and
-                            move.picking_id and
-                            move.picking_id.type == 'out'):
-                        res[line.id] += move.product_qty
         return res
 
     def _prepare_order_line_invoice_line(self, cr, uid, line, account_id=False,

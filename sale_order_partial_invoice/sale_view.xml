@@ -30,12 +30,12 @@
       <field name="name">sale.order.line.invoice.partially.form</field>
       <field name="model">sale.order.line.invoice.partially</field>
       <field name="arch" type="xml">
-        <form version="7.0" string="Invoice Sale Order Lines">
+        <form version="8.0" string="Invoice Sale Order Lines">
         <sheet>
           <separator string="Invoice lines"/>
           <group>
             <field name="line_ids" nolabel="1">
-              <tree version="7.0" string="Lines" create="false" editable="bottom">
+              <tree version="8.0" string="Lines" create="false" editable="bottom">
                 <field name="sale_order_line_id" invisible="1"/>
                 <field name="name"/>
                 <field name="order_qty"/>
